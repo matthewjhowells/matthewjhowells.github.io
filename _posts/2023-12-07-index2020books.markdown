@@ -1,0 +1,18 @@
+---
+layout: post
+title:  "2020 Books"
+date:   2023-12-07 18:47:00 +0000
+categories: books
+---
+These are the books I read in 2020. 
+
+{% assign books = site.data.books | sort: 'DateRead' | reverse %}
+
+| Title | Author | Rating | Date Finished |
+| -------------- | :--------- | ----------: | :---------: |
+{% for entry in books -%}
+  {% if entry.DateRead contains "2020" -%}
+  | [{{entry.Title | remove: '"' }}](https://goodreads.com/book/show/{{entry.BookId}}) | {{ entry.Author}} | {% assign rating = entry.MyRating | to_integer %} {% for i in (1..5) %} {% if i > rating %} ★ {% else %} <font color="orange">★</font> {% endif %} {% endfor %} | {{ entry.DateRead }} |
+  {% endif %}
+{%- endfor -%}
+
